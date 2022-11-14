@@ -32,10 +32,9 @@ const App = () => {
       }
     });
 
-    setTimeout(()=>{
-      varSound.play()
-    },1000)
-    
+    setTimeout(() => {
+      varSound.play();
+    }, 500);
 
     varSound.release();
   };
@@ -45,13 +44,15 @@ const App = () => {
       <ScrollView style={styles.container}>
         <Image style={styles.logo} source={require('./assests/logo.png')} />
         <View style={styles.gridContainer}>
-          {soundList.map((sound) => (
-          <TouchableOpacity
-          key={sound}
-              onPress={()=>{playSound(sound)}}
+          {soundList.map(sound => (
+            <TouchableOpacity
+              key={sound}
+              onPress={() => {
+                playSound(sound);
+              }}
               style={styles.box}>
               <Text style={styles.text}>{sound}</Text>
-          </TouchableOpacity>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
