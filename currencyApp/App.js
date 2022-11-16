@@ -7,6 +7,7 @@ import {
   View,
   StyleSheet,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 
 const currencyPerRuppee = {
@@ -24,7 +25,10 @@ const currencyPerRuppee = {
 const App = () => {
   return (
     <>
-      <ScrollView backgroundColor="#6D7676">
+      <ScrollView
+        backgroundColor="#6D7676"
+        keyboardDismissMode="handled"
+        contentInsetAdjustmentBehavior="automatic">
         <SafeAreaView style={styles.container}>
           <View style={styles.resultContainer}>
             <Text style={styles.resultValue}>some value</Text>
@@ -34,9 +38,14 @@ const App = () => {
               style={styles.input}
               keyboardType='numeric'
               placeholder="Enter value"
-              placeholderTextColor={'#c1c1c1'}>
-
-              </TextInput>
+              placeholderTextColor={'#c1c1c1'}></TextInput>
+          </View>
+          <View style={styles.convertButtonContainer}>
+            {Object.keys(currencyPerRuppee).map(currency => (
+              <TouchableOpacity key={currency} style={styles.convertButton}>
+                <Text style={styles.convertButtonText}>{currency}</Text>
+            </TouchableOpacity>
+            ))}
           </View>
         </SafeAreaView>
       </ScrollView>
@@ -64,7 +73,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   inputField: {
-   //flex: 1,
     height: 70,
     borderColor: '#f0d7c4',
     borderWidth: 2,
@@ -77,5 +85,24 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 20,
     textAlign: 'center',
+  },
+  convertButtonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 10,
+  },
+  convertButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 100,
+    width: '33.33%',
+    borderColor: '#f0d7c4',
+    borderWidth: 2,
+    backgroundColor: '#0f4c75',
+    marginTop: 10,
+  },
+  convertButtonText: {
+    fontSize: 15,
+
   },
 });
