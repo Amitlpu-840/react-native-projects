@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 
+import Snackbar from 'react-native-snackbar';
+
 import {
   Text,
   SafeAreaView,
@@ -23,6 +25,19 @@ const currencyPerRuppee = {
 };
 
 const App = () => {
+  const [inputValue, setInputValue] = useState(0);
+  const [resutValue, setResultValue] = useState(0);
+
+  const buttonPressed = (currency) => {
+    if (!inputValue) {
+      return Snackbar.show({
+        text: 'please enter a value',
+        backgroundColor: '#B4161B',
+        textColor: '#fffff',
+      });
+    }
+  };
+
   return (
     <>
       <ScrollView
@@ -31,14 +46,17 @@ const App = () => {
         contentInsetAdjustmentBehavior="automatic">
         <SafeAreaView style={styles.container}>
           <View style={styles.resultContainer}>
-            <Text style={styles.resultValue}>some value</Text>
+            <Text style={styles.resultValue}>{resutValue}</Text>
           </View>
           <View style={styles.inputField}>
             <TextInput
               style={styles.input}
-              keyboardType='numeric'
+              keyboardType="numeric"
               placeholder="Enter value"
-              placeholderTextColor={'#c1c1c1'}></TextInput>
+              placeholderTextColor={'#c1c1c1'}
+              value={inputValue}
+              onChangeText={(inputValue) => setInputValue(inputValue)}>
+              </TextInput>
           </View>
           <View style={styles.convertButtonContainer}>
             {Object.keys(currencyPerRuppee).map(currency => (
@@ -103,6 +121,5 @@ const styles = StyleSheet.create({
   },
   convertButtonText: {
     fontSize: 15,
-
   },
 });
