@@ -36,6 +36,15 @@ const App = () => {
         textColor: '#fffff',
       });
     }
+
+    let result = parseFloat(inputValue) * currencyPerRuppee[currency];
+    setResultValue(result.toFixed(2));
+    //setInputValue(0);
+  };
+
+  const clrButton = () => {
+    setInputValue(0);
+    setResultValue(0);
   };
 
   return (
@@ -45,9 +54,11 @@ const App = () => {
         keyboardDismissMode="handled"
         contentInsetAdjustmentBehavior="automatic">
         <SafeAreaView style={styles.container}>
+          
           <View style={styles.resultContainer}>
             <Text style={styles.resultValue}>{resutValue}</Text>
           </View>
+          
           <View style={styles.inputField}>
             <TextInput
               style={styles.input}
@@ -55,15 +66,29 @@ const App = () => {
               placeholder="Enter value"
               placeholderTextColor={'#c1c1c1'}
               value={inputValue}
-              onChangeText={(inputValue) => setInputValue(inputValue)}>
-              </TextInput>
+              onChangeText={(inputValue) => setInputValue(inputValue)
+              }></TextInput>
           </View>
+          
+          
           <View style={styles.convertButtonContainer}>
             {Object.keys(currencyPerRuppee).map(currency => (
-              <TouchableOpacity key={currency} style={styles.convertButton}>
+              <TouchableOpacity
+                onPress={() => buttonPressed(currency)}
+                key={currency}
+                style={styles.convertButton}>
                 <Text style={styles.convertButtonText}>{currency}</Text>
-            </TouchableOpacity>
+              </TouchableOpacity>
             ))}
+          </View>
+          
+          
+          <View>
+            <TouchableOpacity
+              onPress={() => clrButton()}
+              style={styles.clearButton}>
+              <Text>CLEAR</Text>
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
       </ScrollView>
@@ -118,8 +143,22 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     backgroundColor: '#0f4c75',
     marginTop: 10,
+    borderRadius: 10,
   },
   convertButtonText: {
     fontSize: 15,
+  },
+
+  clearButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: '33%',
+    height: 50,
+    width: '33.33%',
+    borderColor: '#f0d7c4',
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: '#EB4D4B',
+    marginTop: 15,
   },
 });
