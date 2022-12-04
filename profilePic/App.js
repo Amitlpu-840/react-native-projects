@@ -23,7 +23,7 @@ const PendingView = () => (
 )
 
 const App = () => {
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(null) 
 
   const takePicture = async (camera) => {
     try {
